@@ -13,8 +13,6 @@ import { CreateCabin } from "../../services/apiCabins";
 
 
 
-
-
 function CreateCabinForm({ setShowForm }) {
 
   const { register, handleSubmit, reset, getValues, formState } = useForm()
