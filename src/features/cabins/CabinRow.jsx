@@ -48,7 +48,7 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false)
-  const { id: cabinId, name, maxCapacity, regularPrice, discount, image } = cabin
+  const { id: cabinId, image, name, maxCapacity, regularPrice, discount } = cabin
   const queryClient = useQueryClient()
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: deleteCabin,
@@ -64,12 +64,12 @@ function CabinRow({ cabin }) {
   })
   return (
     <>
-      <TableRow role="table">
+      <TableRow roleimage="table">
         <Img src={image} alt="" />
         <Cabin>{name}</Cabin>
         <div>Fits up to {maxCapacity} guests</div>
         <Price>{formatCurrency(regularPrice)}</Price>
-        <Discount>{formatCurrency(discount)}</Discount>
+        {discount ? <Discount>{formatCurrency(discount)} </Discount> : <span>&mdash;</span>}
         <div>
           <button onClick={() => setShowForm(show => !show)}>Edit</button>
           <button onClick={() => mutate(cabinId)} disabled={isDeleting}>{isDeleting ? "Deleting.." : "Delete"}</button>
